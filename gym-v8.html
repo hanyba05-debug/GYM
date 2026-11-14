@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>PRO GYM | اصنع نسختك الأقوى</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg-dark:#09090b;--bg-card:#121217;--primary:#ff3b30;--glow:rgba(255,59,48,.45);--accent:#ff9500;--muted:#9ca3af;--glass:rgba(255,255,255,.03);--gb:rgba(255,255,255,.08);--sm:cubic-bezier(.22,1,.36,1);color-scheme:dark}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Tajawal',Tahoma,Arial,sans-serif}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{background:var(--bg-dark);color:#fff;overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased;padding-bottom:env(safe-area-inset-bottom,0px)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.grad{background:linear-gradient(45deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sp{position:fixed;top:0;right:0;height:3px;width:0;background:linear-gradient(90deg,var(--primary),var(--accent));z-index:2000;box-shadow:0 0 10px var(--primary)}
+.reveal{opacity:0;transform:translate3d(0,35px,0);transition:opacity .8s var(--sm),transform .8s var(--sm)}
+.reveal.active{opacity:1;transform:translate3d(0,0,0)}
+nav{position:fixed;top:0;width:100%;padding:calc(18px + env(safe-area-inset-top,0px)) 6% 18px;display:flex;justify-content:space-between;align-items:center;background:rgba(9,9,11,.78);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--gb);z-index:1000;transition:padding .4s var(--sm),background .4s var(--sm)}
+nav.scrolled{padding:calc(12px + env(safe-area-inset-top,0px)) 6% 12px;background:rgba(9,9,11,.96)}
+.logo{font-size:1.9rem;font-weight:900;letter-spacing:2px;color:#fff;text-decoration:none;display:flex;align-items:center;gap:10px}
+.nl{display:flex;gap:18px;list-style:none}
+.nl a{color:var(--muted);text-decoration:none;font-weight:500;position:relative;transition:color .3s;white-space:nowrap}
+.nl a:hover{color:#fff}
+.nl a::after{content:'';position:absolute;bottom:-5px;right:0;width:0;height:2px;background:var(--primary);transition:width .35s var(--sm)}
+.nl a:hover::after{width:100%}
+.btn-glow{background:linear-gradient(45deg,var(--primary),var(--accent));color:#fff;padding:12px 26px;border-radius:50px;text-decoration:none;font-weight:700;font-size:1rem;box-shadow:0 4px 20px var(--glow);transition:transform .35s var(--sm),box-shadow .35s var(--sm);border:0;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn-glow:hover{transform:translate3d(0,-3px,0) scale(1.02);box-shadow:0 10px 30px var(--glow)}
+.btn-ghost{background:var(--glass)!important;box-shadow:none!important;border:1px solid var(--gb)!important}
+.hero{min-height:100vh;display:flex;align-items:center;padding:120px 8% 60px;position:relative;background:radial-gradient(circle at 20% 50%,rgba(255,59,48,.14),transparent 55%),url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat,var(--bg-dark)}
+.hero::before{content:'';position:absolute;inset:0;background:linear-gradient(to left,rgba(9,9,11,.96) 35%,rgba(9,9,11,.55))}
+.hc{position:relative;z-index:2;max-width:660px}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:var(--glass);border:1px solid var(--gb);border-radius:30px;color:var(--accent);font-weight:700;font-size:.9rem;margin-bottom:20px}
+.hero h1{font-size:4rem;font-weight:900;line-height:1.15;margin-bottom:20px}
+.hero p{color:var(--muted);font-size:1.2rem;margin-bottom:35px}
+.hb{display:flex;gap:15px;flex-wrap:wrap}
+.hs{display:flex;gap:40px;margin-top:50px;padding-top:30px;border-top:1px solid var(--gb);flex-wrap:wrap}
+.stat h3{font-size:2rem;font-weight:900}
+.stat p{font-size:.9rem;margin:0}
+section{padding:95px 8%}
+.sh{text-align:center;margin-bottom:55px}
+.sh h2{font-size:2.7rem;font-weight:900;margin-bottom:14px}
+.sh h2 span{color:var(--primary)}
+.sh p{color:var(--muted);max-width:620px;margin:0 auto}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px}
+.card-box{background:var(--bg-card);border:1px solid var(--gb);padding:38px 28px;border-radius:24px;transition:transform .45s var(--sm),border-color .45s,box-shadow .45s}
+.card-box:hover{transform:translate3d(0,-10px,0);border-color:var(--primary);box-shadow:0 20px 40px rgba(0,0,0,.5)}
+.card-icon{width:62px;height:62px;background:rgba(255,59,48,.1);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:1.7rem;color:var(--primary);margin-bottom:22px;transition:transform .4s var(--sm),background .4s,color .4s}
+.card-box:hover .card-icon,.fatburn-card:hover .card-icon{background:var(--primary);color:#fff;transform:scale(1.08) rotate(-4deg)}
+.card-box h3{font-size:1.45rem;margin-bottom:12px}
+.card-box p{color:var(--muted)}
+.smart-bar-section{background:radial-gradient(circle at 15% 50%,rgba(255,59,48,.08),transparent 55%)}
+.bih{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.bih .card-icon{margin-bottom:0}
+.macro-tag{background:rgba(255,149,0,.15);color:var(--accent);padding:4px 12px;border-radius:20px;font-size:.85rem;font-weight:700}
+.fatburn-grid{display:grid;grid-template-columns:1fr 1fr;gap:35px}
+.fatburn-card{background:linear-gradient(145deg,#15151c,#0f0f13);border:1px solid var(--gb);border-radius:28px;padding:40px;transition:transform .45s var(--sm),border-color .4s}
+.fatburn-card:hover{transform:translate3d(0,-8px,0);border-color:var(--accent)}
+.fatburn-card h3{font-size:1.45rem;margin-bottom:12px}
+.fatburn-card>p{color:var(--muted)}
+.fl{list-style:none;margin-top:20px}
+.fl li{margin-bottom:14px;color:#d1d5db;display:flex;align-items:center;gap:12px}
+.fl li i{color:var(--accent)}
+.calculator-section{background:radial-gradient(circle at 80% 50%,rgba(255,149,0,.08),transparent 50%)}
+.calc-container{display:grid;grid-template-columns:1.15fr .85fr;gap:35px;background:var(--bg-card);border:1px solid var(--gb);border-radius:30px;padding:42px;box-shadow:0 25px 50px rgba(0,0,0,.4)}
+.calc-form{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.ig{display:flex;flex-direction:column;gap:7px}
+.ig.full{grid-column:span 2}
+.ig label{font-size:.92rem;color:var(--muted);font-weight:500}
+.ig input,.ig select{background:rgba(255,255,255,.04);border:1px solid var(--gb);padding:13px 16px;border-radius:14px;color:#fff;font-size:1rem;outline:none;transition:border-color .3s,background .3s}
+.ig input:focus,.ig select:focus{border-color:var(--primary);background:rgba(255,255,255,.07)}
+.ig select option{background:var(--bg-card);color:#fff}
+#calcErr{color:#f87171;font-weight:700;min-height:1.4em;grid-column:span 2}
+.note{grid-column:span 2;font-size:.82rem;color:var(--muted)}
+.calc-result{background:linear-gradient(145deg,rgba(255,59,48,.1),rgba(255,149,0,.05));border:1px solid rgba(255,59,48,.25);border-radius:24px;padding:30px;display:flex;flex-direction:column;justify-content:space-between;gap:18px;transition:transform .35s var(--sm)}
+.top{text-align:center;border-bottom:1px solid var(--gb);padding-bottom:18px}
+.top small{font-size:.9rem;color:var(--muted)}
+.big{font-size:2.1rem;font-weight:900;margin-top:4px}
+.status-pill{padding:5px 15px;border-radius:20px;font-size:.85rem;font-weight:700;background:rgba(255,255,255,.08);display:inline-block;margin-top:6px}
+.mg{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.mc{background:rgba(9,9,11,.65);border:1px solid var(--gb);padding:18px 12px;border-radius:18px;text-align:center}
+.mc h4{font-size:.9rem;color:var(--muted);margin-bottom:5px;font-weight:500}
+.mv{font-size:1.9rem;font-weight:900}
+.mv span{font-size:.95rem;color:var(--accent);font-weight:700}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:30px;align-items:center}
+.price-card{background:var(--bg-card);border:1px solid var(--gb);padding:42px 32px;border-radius:28px;text-align:center;transition:transform .45s var(--sm),border-color .45s}
+.price-card:hover{transform:translate3d(0,-8px,0)}
+.price-card.popular{background:linear-gradient(145deg,#181820,#111115);border:2px solid var(--primary);transform:scale(1.04);position:relative}
+.price-card.popular:hover{transform:scale(1.06) translate3d(0,-5px,0)}
+.popular-tag{position:absolute;top:-15px;left:50%;transform:translateX(-50%);background:linear-gradient(45deg,var(--primary),var(--accent));padding:5px 20px;border-radius:20px;font-size:.85rem;font-weight:700}
+.price-card h3{font-size:1.55rem;margin-bottom:12px}
+.price{font-size:3.3rem;font-weight:900;margin-bottom:24px}
+.price span{font-size:1rem;color:var(--muted);font-weight:400}
+.pf{list-style:none;margin-bottom:32px;text-align:right}
+.pf li{margin-bottom:14px;color:var(--muted);display:flex;align-items:center;gap:10px}
+.pf li i{color:var(--primary)}
+.price-card .btn-glow{width:100%}
+footer{background:#050507;padding:50px 8% calc(30px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--gb)}
+.ft{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;padding-bottom:30px;border-bottom:1px solid var(--gb)}
+.socials{display:flex;gap:15px}
+.socials a{width:45px;height:45px;border-radius:50%;background:var(--glass);border:1px solid var(--gb);display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;transition:transform .35s var(--sm),background .35s}
+.socials a:hover{background:var(--primary);transform:translate3d(0,-4px,0)}
+.fb{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;padding-top:25px;gap:15px}
+.copyright{color:var(--muted);font-size:.95rem}
+.dev{display:inline-flex;align-items:center;gap:10px;padding:10px 22px;background:linear-gradient(90deg,rgba(255,59,48,.12),rgba(255,149,0,.12));border:1px solid rgba(255,59,48,.3);border-radius:50px;font-size:.95rem;color:#e5e7eb;box-shadow:0 4px 15px rgba(0,0,0,.3);transition:transform .4s var(--sm),box-shadow .4s,border-color .4s;direction:ltr}
+.dev:hover{border-color:var(--primary);box-shadow:0 0 25px var(--glow);transform:scale(1.04)}
+.dev i{color:var(--primary);animation:pulse 2s infinite}
+.dev strong{font-weight:900;letter-spacing:.5px;text-transform:capitalize}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
+@media(max-width:960px){.calc-container,.fatburn-grid{grid-template-columns:1fr}}
+@media(max-width:768px){
+ nav,nav.scrolled{padding-left:5%;padding-right:5%}
+ .logo{font-size:1.6rem}
+ .hero{padding-top:150px}
+ .hero h1{font-size:2.7rem}
+ .hs{gap:24px}
+ section{padding:70px 6%}
+ .sh h2{font-size:2.1rem}
+ .price-card.popular{transform:scale(1)}
+ .calc-container{padding:26px}
+ .fatburn-card{padding:28px}
+ .calc-form{grid-template-columns:1fr}
+ .ig.full,#calcErr,.note{grid-column:span 1}
+ .big{font-size:1.7rem}
+ .fb{flex-direction:column;text-align:center}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+[hidden]{display:none!important}.errmsg{color:#f87171;font-weight:700;min-height:1.4em;grid-column:span 2}@media(max-width:768px){.errmsg{grid-column:span 1}}
+.mmb{display:none;background:var(--glass);border:1px solid var(--gb);color:#fff;width:44px;height:44px;border-radius:12px;font-size:1.3rem;cursor:pointer;align-items:center;justify-content:center}
+.navr{display:flex;align-items:center;gap:12px}
+.drawer{position:fixed;top:calc(84px + env(safe-area-inset-top,0px));right:5%;left:5%;background:rgba(18,18,23,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--gb);border-radius:22px;padding:22px;display:flex;flex-direction:column;gap:8px;z-index:999;opacity:0;pointer-events:none;visibility:hidden;transform:translateY(-15px);transition:opacity .35s var(--sm),transform .35s var(--sm),visibility .35s}
+.drawer.open{opacity:1;pointer-events:auto;visibility:visible;transform:translateY(0)}
+.drawer a{color:#fff;text-decoration:none;font-size:1.1rem;font-weight:700;padding:10px 12px;border-radius:10px}
+.drawer a:hover{background:var(--glass);color:var(--primary)}
+.info-faq-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:35px;align-items:start}
+.hours-card{background:linear-gradient(145deg,#15151c,#101015);border:1px solid var(--gb);border-radius:28px;padding:38px}
+.hours-head{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.hours-head .card-icon{margin-bottom:0;width:52px;height:52px;font-size:1.4rem}
+.hours-head h3{font-size:1.5rem}
+.hours-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:15px 0;border-bottom:1px solid var(--gb)}
+.hours-row:last-child{border-bottom:0}
+.hours-row span:first-child{font-weight:700}
+.hours-row span:last-child{color:var(--accent);font-weight:700;background:rgba(255,149,0,.1);padding:4px 14px;border-radius:20px;font-size:.9rem;white-space:nowrap}
+.faq-list{display:flex;flex-direction:column;gap:15px}
+.faq-item{background:var(--bg-card);border:1px solid var(--gb);border-radius:20px;overflow:hidden;transition:border-color .3s}
+.faq-item.active{border-color:var(--primary)}
+.faq-q{width:100%;background:none;border:0;padding:20px 24px;color:#fff;font-size:1.05rem;font-weight:700;text-align:right;display:flex;justify-content:space-between;align-items:center;gap:12px;cursor:pointer}
+.faq-q i{color:var(--primary);transition:transform .35s var(--sm)}
+.faq-item.active .faq-q i{transform:rotate(180deg)}
+.faq-a{max-height:0;overflow:hidden;padding:0 24px;color:var(--muted);transition:max-height .4s var(--sm),padding .4s var(--sm)}
+.faq-item.active .faq-a{max-height:400px;padding:0 24px 20px}
+.wa-float{position:fixed;bottom:calc(24px + env(safe-area-inset-bottom,0px));right:20px;width:54px;height:54px;background:#25d366;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.9rem;box-shadow:0 8px 25px rgba(37,211,102,.4);z-index:1500;text-decoration:none;transition:transform .35s var(--sm),box-shadow .35s}
+.wa-float:hover{transform:scale(1.1) translateY(-4px);box-shadow:0 12px 30px rgba(37,211,102,.6)}
+@media(max-width:1180px){.nl{display:none}.mmb{display:flex}}
+@media(max-width:960px){.info-faq-grid{grid-template-columns:1fr}}
+@media(max-width:420px){.navr .btn-glow{display:none}}
+.fa-solid,.fa-brands,.fa-regular{display:inline-block;width:1em;height:1em;vertical-align:-.125em;flex-shrink:0;font-style:normal;background-color:currentColor;-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat}
+.fa-dumbbell{--m:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M6%207v10M3%209v6M18%207v10M21%209v6M6%2012h12%27/%3E%3C/svg%3E")}
+.fa-fire{--m:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M8.5%2014.5A2.5%202.5%200%200%200%2011%2012c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05%202-6%20.5%202.5%202%204.9%204%206.5%202%201.6%203%203.5%203%205.5a7%207%200%201%201-14%200c0-1.15.43-2.29%201-3a2.5%202.5%200%200%200%202.5%202.5z%27/%3E%3C/svg%3E")}
+.fa-fire-flame-curved{--m:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M8.5%2014.5A2.5%202.5%200%200%200%2011%2012c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05%202-6%20.5%202.5%202%204.9%204%206.5%202%201.6%203%203.5%203%205.5a7%207%200%201%201-14%200c0-1.15.43-2.29%201-3a2.5%202.5%200%200%200%202.5%202.5z%27/%3E%3C/svg%3E")}
+.fa-bolt{--m:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M13%202%203%2014h9l-1%208%2010-12h-9l1-8z%27/%3E%3C/svg%3E")}
+.fa-heart-pulse{--m:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M19%2014c1.49-1.46%203-3.21%203-5.5A5.5%205.5%200%200%200%2016.5%203c-1.76%200-3%20.5-4.5%202-1.5-1.5-2.74-2-4.5-2A5.5%205.5%200%200%200%202%208.5c0%202.3%201.5%204.05%203%205.5l7%207z%27/%3E%3Cpath%20d%3D%27M3.2%2012h6.3l.5-1%202%204.5%202-7%201.5%203.5h5.3%27/%3E%3C/svg%3E")}
+.fa-spa{--m:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M8%203c-1%202%201%203%200%205s-1%203%200%205%27/%3E%3Cpath%20d%3D%27M12%203c-1%202%201%203%200%205s-1%203%200%205%27/%3E%3Cpath%20d%3D%27M16%203c-1%202%201%203%200%205s-1%203%200%205%27/%3E%3Cpath%20d%3D%27M4%2018h16%27/%3E%3C/svg%3E")}
+.fa-blender{--m:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M7%203h10l-1.5%2017a2%202%200%200%201-2%201.8h-3a2%202%200%200%201-2-1.8z%27/%3E%3Cpath%20d%3D%27M7%208h10M13%203l2-2%27/%3E%3C/svg%3E")}
+.fa-bolt-lightning{--m:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M10%202h4v3l1%202v13a2%202%200%200%201-2%202h-2a2%202%200%200%201-2-2V7l1-2z%27/%3E%3Cpath%20d%3D%27M9%2011h6%27/%3E%3C/svg%3E")}
+.fa-bowl-food{--m:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M3%2012h18a8%208%200%200%201-8%208h-2a8%208%200%200%201-8-8z%27/%3E%3Cpath%20d%3D%27M8%208c0-1.5%201-2%201-3.5M12%208c0-1.5%201-2%201-3.5M16%208c0-1.5%201-2%201-3.5%27/%3E%3C/svg%3E")}
+.fa-stethoscope{--m:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M11%202v2M5%202v2%27/%3E%3Cpath%20d%3D%27M5%203H4a2%202%200%200%200-2%202v4a6%206%200%200%200%2012%200V5a2%202%200%200%200-2-2h-1%27/%3E%3Cpath%20d%3D%27M8%2015a6%206%200%200%200%2012%200v-3%27/%3E%3Ccircle%20cx%3D%2720%27%20cy%3D%2710%27%20r%3D%272%27/%3E%3C/svg%3E")}
+.fa-circle-check{--m:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Ccircle%20cx%3D%2712%27%20cy%3D%2712%27%20r%3D%2710%27/%3E%3Cpath%20d%3D%27m9%2012%202%202%204-4%27/%3E%3C/svg%3E")}
+.fa-check{--m:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M20%206%209%2017l-5-5%27/%3E%3C/svg%3E")}
+.fa-calculator{--m:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Crect%20x%3D%274%27%20y%3D%272%27%20width%3D%2716%27%20height%3D%2720%27%20rx%3D%272%27/%3E%3Cpath%20d%3D%27M8%206h8M8%2010h.01M12%2010h.01M16%2010h.01M8%2014h.01M12%2014h.01M16%2014h.01M8%2018h.01M12%2018h.01M16%2018h.01%27/%3E%3C/svg%3E")}
+.fa-arrow-down{--m:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M12%205v14M19%2012l-7%207-7-7%27/%3E%3C/svg%3E")}
+.fa-whatsapp{--m:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M7.9%2020A9%209%200%201%200%204%2016.1L2%2022z%27/%3E%3Cpath%20d%3D%27M9%209.5c.5%202%202.5%204.2%205%205l1.5-1.5-2-1-1%20.8c-.8-.4-1.6-1.2-2-2l.8-1-1-2z%27/%3E%3C/svg%3E")}
+.fa-instagram{--m:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2720%27%20height%3D%2720%27%20rx%3D%275%27/%3E%3Ccircle%20cx%3D%2712%27%20cy%3D%2712%27%20r%3D%274%27/%3E%3Cpath%20d%3D%27M17.5%206.5h.01%27/%3E%3C/svg%3E")}
+.fa-facebook-f{--m:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M18%202h-3a5%205%200%200%200-5%205v3H7v4h3v8h4v-8h3l1-4h-4V7a1%201%200%200%201%201-1h3z%27/%3E%3C/svg%3E")}
+.fa-tiktok{--m:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M9%2018V5l12-2v13%27/%3E%3Ccircle%20cx%3D%276%27%20cy%3D%2718%27%20r%3D%273%27/%3E%3Ccircle%20cx%3D%2718%27%20cy%3D%2716%27%20r%3D%273%27/%3E%3C/svg%3E")}
+.fa-code{--m:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27m16%2018%206-6-6-6M8%206l-6%206%206%206%27/%3E%3C/svg%3E")}
+.fa-bars{--m:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M4%206h16M4%2012h16M4%2018h16%27/%3E%3C/svg%3E")}
+.fa-chevron-down{--m:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27m6%209%206%206%206-6%27/%3E%3C/svg%3E")}
+.fa-circle-info{--m:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Ccircle%20cx%3D%2712%27%20cy%3D%2712%27%20r%3D%2710%27/%3E%3Cpath%20d%3D%27M12%2016v-4M12%208h.01%27/%3E%3C/svg%3E")}
+.fa-triangle-exclamation{--m:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27m21.73%2018-8-14a2%202%200%200%200-3.48%200l-8%2014A2%202%200%200%200%204%2021h16a2%202%200%200%200%201.73-3z%27/%3E%3Cpath%20d%3D%27M12%209v4M12%2017h.01%27/%3E%3C/svg%3E")}
+.fa-circle-exclamation{--m:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Ccircle%20cx%3D%2712%27%20cy%3D%2712%27%20r%3D%2710%27/%3E%3Cpath%20d%3D%27M12%208v4M12%2016h.01%27/%3E%3C/svg%3E")}
+.fa-clock{--m:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Ccircle%20cx%3D%2712%27%20cy%3D%2712%27%20r%3D%2710%27/%3E%3Cpath%20d%3D%27M12%206v6l4%202%27/%3E%3C/svg%3E")}
+</style>
+</head>
+<body>
+<div class="sp" id="sp"></div>
+<nav id="nav">
+<a href="#home" class="logo"><i class="fa-solid fa-dumbbell" style="color:var(--primary)"></i><span dir="ltr">PRO <span class="grad">GYM</span></span></a>
+<ul class="nl"><li><a href="#home">الرئيسية</a></li><li><a href="#features">المميزات</a></li><li><a href="#smart-bar">البار الذكي</a></li><li><a href="#fatburn">حرق الدهون</a></li><li><a href="#bodyfat">حاسبة الدهون</a></li><li><a href="#calculator">حاسبة الماكروز</a></li><li><a href="#pricing">الباقات</a></li><li><a href="#faq">الأسئلة الشائعة</a></li></ul>
+<div class="navr"><a href="#pricing" class="btn-glow">انضم الآن</a><button type="button" class="mmb" id="mmb" aria-label="القائمة" aria-expanded="false"><i class="fa-solid fa-bars"></i></button></div>
+</nav>
+<div class="drawer" id="drawer"><a href="#home">الرئيسية</a><a href="#features">المميزات</a><a href="#smart-bar">البار الذكي</a><a href="#fatburn">حرق الدهون</a><a href="#bodyfat">حاسبة الدهون</a><a href="#calculator">حاسبة الماكروز</a><a href="#pricing">الباقات</a><a href="#faq">أوقات الدوام والأسئلة</a></div>
+<main>
+<section class="hero" id="home"><div class="hc reveal active">
+<div class="badge"><i class="fa-solid fa-fire"></i> الجيل الجديد من اللياقة البدنية</div>
+<h1>تجاوز حدودك في <span class="grad">PRO GYM</span></h1>
+<p>بيئة تدريبية متكاملة مصممة خصيصاً للأبطال. أحدث الأجهزة العالمية، بار بروتين ذكي، وبرامج علمية لحرق الدهون وبناء العضلات.</p>
+<div class="hb"><a href="#pricing" class="btn-glow">ابدأ رحلتك من 15$</a><a href="#calculator" class="btn-glow btn-ghost">احسب احتياجك الغذائي</a></div>
+<div class="hs"><div class="stat"><h3>+150</h3><p>جهاز رياضي حديث</p></div><div class="stat"><h3>24/7</h3><p>دعم ومتابعة مستمرة</p></div><div class="stat"><h3>+1200</h3><p>عضو نشط</p></div></div>
+</div></section>
+<section id="features"><div class="sh reveal"><h2>لماذا تختار <span>PRO GYM</span>؟</h2><p>نوفر لك كل ما تحتاجه لتحويل شغفك بالرياضة إلى أسلوب حياة متكامل</p></div>
+<div class="grid-3">
+<div class="card-box reveal"><div class="card-icon"><i class="fa-solid fa-bolt"></i></div><h3>معدات احترافية</h3><p>أحدث أجهزة كمال الأجسام والكارديو من أفضل العلامات التجارية العالمية لضمان أعلى أداء وأمان.</p></div>
+<div class="card-box reveal"><div class="card-icon"><i class="fa-solid fa-heart-pulse"></i></div><h3>منطقة الكروس فت</h3><p>مساحة واسعة مجهزة بالكامل لتمارين اللياقة العالية، المرونة، ورفع الأثقال الحرة.</p></div>
+<div class="card-box reveal"><div class="card-icon"><i class="fa-solid fa-spa"></i></div><h3>ساونا واستشفاء</h3><p>غرف ساونا وبخار فاخرة لمساعدة عضلاتك على الاسترخاء والاستشفاء السريع بعد التمارين الشاقة.</p></div>
+</div></section>
+<section id="smart-bar" class="smart-bar-section"><div class="sh reveal"><h2>البار <span>الذكي</span> (Smart Bar)</h2><p>تغذية رياضية متكاملة ومحسوبة السعرات والماكروز تُحضّر طازجة قبل وبعد تمرينك مباشرة</p></div>
+<div class="grid-3">
+<div class="card-box reveal"><div class="bih"><div class="card-icon"><i class="fa-solid fa-blender"></i></div><span class="macro-tag">32g بروتين</span></div><h3>مخفوق الاستشفاء العضلي</h3><p>مزيج واي بروتين أيزوليت مع الشوفان، زبدة الفول السوداني الطبيعية، والموز لتعويض الألياف العضلية فوراً.</p></div>
+<div class="card-box reveal"><div class="bih"><div class="card-icon"><i class="fa-solid fa-bolt-lightning"></i></div><span class="macro-tag">Zero Sugar</span></div><h3>مشروبات الطاقة والـ BCAA</h3><p>مشروبات ما قبل التمرين (Pre-Workout) والأحماض الأمينية لرفع التركيز وضخ الدم أثناء التمارين الشاقة.</p></div>
+<div class="card-box reveal"><div class="bih"><div class="card-icon"><i class="fa-solid fa-bowl-food"></i></div><span class="macro-tag">450 سعرة</span></div><h3>وجبات صحية محسوبة</h3><p>وجبات عالية البروتين وقليلة الدهون جاهزة للتناول، مصممة خصيصاً لدعم مرحلتي التضخيم أو التنشيف.</p></div>
+</div></section>
+<section id="fatburn" style="background:rgba(255,255,255,.01)"><div class="sh reveal"><h2>حرق الدهون <span>والاستشارات الصحية</span></h2><p>برامج علمية دقيقة للتخلص من الدهون العنيدة والوصول إلى قوام رياضي متناسق بصحة مثالية</p></div>
+<div class="fatburn-grid">
+<div class="fatburn-card reveal"><div class="card-icon"><i class="fa-solid fa-fire-flame-curved"></i></div><h3>برامج حرق الدهون المكثفة (HIIT & Cardio)</h3><p>أنظمة تدريبية متطورة ترفع معدل الأيض (الحرق) في جسمك حتى 24 ساعة بعد انتهاء التمرين.</p><ul class="fl"><li><i class="fa-solid fa-circle-check"></i> حصص كارديو عالية الكثافة لحرق أسرع</li><li><i class="fa-solid fa-circle-check"></i> الحفاظ على الكتلة العضلية أثناء خسارة الوزن</li><li><i class="fa-solid fa-circle-check"></i> متابعة أسبوعية لمحيط الخصر ونسبة الدهون</li></ul></div>
+<div class="fatburn-card reveal"><div class="card-icon"><i class="fa-solid fa-stethoscope"></i></div><h3>الاستشارات الصحية وتحليل الجسم (InBody)</h3><p>لا نعتمد على التخمين؛ نبدأ بفحص شامل لمكونات جسمك لنبني خطتك الصحية على أرقام حقيقية.</p><ul class="fl"><li><i class="fa-solid fa-circle-check"></i> تحليل دقيق للكتلة العضلية، الدهون، والسوائل</li><li><i class="fa-solid fa-circle-check"></i> استشارات غذائية مخصصة حسب حالتك الصحية</li><li><i class="fa-solid fa-circle-check"></i> توصيات بالفيتامينات والمكملات الضرورية فقط</li></ul></div>
+</div></section>
+<section id="bodyfat" style="background:rgba(255,255,255,.01)"><div class="sh reveal"><h2>حاسبة <span>نسبة الدهون</span></h2><p>قدّر نسبة الدهون في جسمك من الجنس والعمر والوزن والطول فقط، بدون أي قياسات أو شريط متر</p></div>
+<div class="calc-container reveal"><div class="calc-form">
+<div class="ig"><label for="bfGender">الجنس</label><select id="bfGender"><option value="male" selected>ذكر</option><option value="female">أنثى</option></select></div>
+<div class="ig"><label for="bfAge">العمر (سنة)</label><input type="number" id="bfAge" inputmode="numeric" value="25"></div>
+<div class="ig"><label for="bfWeight">الوزن (كغ)</label><input type="number" id="bfWeight" inputmode="decimal" value="75"></div>
+<div class="ig"><label for="bfHeight">الطول (سم)</label><input type="number" id="bfHeight" inputmode="decimal" value="178"></div>
+<div id="bfErr" role="alert" class="errmsg"></div>
+<div class="ig full"><button type="button" class="btn-glow" id="bfBtn" style="width:100%"><i class="fa-solid fa-calculator"></i> احسب نسبة الدهون</button></div>
+<p class="note">هذا تقدير سريع بمعادلة عامة، ودقته أقل من القياسات أو فحص InBody. وبيطلع أعلى من الحقيقة عند الرياضيين، لأن العضل بيزيد الوزن. للنتيجة الدقيقة اطلب فحص InBody بالنادي.</p>
+</div>
+<div class="calc-result"><div class="top"><small>نسبة الدهون التقديرية</small><div class="big"><span id="bfV" class="grad">--</span> %</div><div class="status-pill" id="bfS">--</div></div>
+<div class="mg"><div class="mc"><h4>كتلة الدهون</h4><div class="mv" id="bfFat">--</div></div><div class="mc"><h4>الكتلة الصافية (عضل وعظم)</h4><div class="mv" id="bfLean">--</div></div></div>
+<button type="button" class="btn-glow btn-ghost" id="bfUse" style="width:100%"><i class="fa-solid fa-arrow-down"></i> استعمل النتيجة بحاسبة الماكروز</button></div></div></section>
+<section id="calculator" class="calculator-section"><div class="sh reveal"><h2>حاسبة <span>البروتين والكارب والكتلة</span></h2><p>أدخل وزنك وطولك وهدفك الرياضي ليقوم النظام بحساب احتياجك اليومي الدقيق من العناصر الغذائية</p></div>
+<div class="calc-container reveal"><div class="calc-form">
+<div class="ig"><label for="weight">الوزن الحالي (كغ)</label><input type="number" id="weight" inputmode="decimal" value="75"></div>
+<div class="ig"><label for="height">الطول (سم)</label><input type="number" id="height" inputmode="decimal" value="178"></div>
+<div class="ig"><label for="bodyfat">نسبة الدهون التقريبية % (اختياري)</label><input type="number" id="bodyfat" inputmode="decimal" placeholder="مثال: 18" value="18"></div>
+<div class="ig"><label for="activity">مستوى النشاط</label><select id="activity"><option value="1.35">خفيف (1-2 تمرين/أسبوع)</option><option value="1.55" selected>متوسط (3-5 تمارين/أسبوع)</option><option value="1.75">عالي (6-7 تمارين/أسبوع)</option></select></div>
+<div class="ig full"><label for="goal">هدفك الرياضي</label><select id="goal"><option value="cut">تنشيف وحرق دهون (Fat Loss)</option><option value="maintain" selected>الحفاظ على الوزن واللياقة (Maintenance)</option><option value="bulk">تضخيم وبناء عضلات (Muscle Gain)</option></select></div>
+<div id="calcErr" role="alert"></div>
+<div class="ig full"><button type="button" class="btn-glow" id="calcBtn" style="width:100%"><i class="fa-solid fa-calculator"></i> احسب البروتين والكارب والكتلة</button></div>
+<p class="note">الأرقام تقديرية وعامة، وليست بديلاً عن استشارة مختص تغذية أو طبيب.</p>
+</div>
+<div class="calc-result" id="rc">
+<div class="top"><small>مؤشر الكتلة (BMI) / الكتلة العضلية الصافية</small><div class="big"><span id="bmiV" class="grad">--</span> BMI &nbsp;|&nbsp; <span id="lbmV" style="color:var(--accent)">--</span> كغ صافي</div><div class="status-pill" id="bmiS">--</div></div>
+<div class="mg">
+<div class="mc"><h4>احتياج البروتين اليومي</h4><div class="mv" id="pV">--</div></div>
+<div class="mc"><h4>احتياج الكارب اليومي</h4><div class="mv" id="cV">--</div></div>
+<div class="mc"><h4>الدهون الصحية</h4><div class="mv" id="fV">--</div></div>
+<div class="mc"><h4>إجمالي السعرات</h4><div class="mv grad" id="kV">--</div></div>
+</div></div></div></section>
+<section id="pricing" style="background:rgba(255,255,255,.01)"><div class="sh reveal"><h2>باقات <span>الاشتراك</span></h2><p>أسعار تنافسية مرنة تبدأ من 15$ فقط — اضغط على الباقة للتسجيل المباشر عبر واتساب</p></div>
+<div class="pricing-grid">
+<div class="price-card  reveal"><h3>الباقة الأساسية</h3><div class="price">$15 <span>/ شهرياً</span></div><ul class="pf"><li><i class="fa-solid fa-check"></i> دخول غير محدود لصالة الحديد</li><li><i class="fa-solid fa-check"></i> استخدام أجهزة الكارديو الحديثة</li><li><i class="fa-solid fa-check"></i> خزائن خاصة آمنة</li></ul><a class="btn-glow btn-ghost" href="https://wa.me/963962266222?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20PRO%20GYM%20%F0%9F%92%AA%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%A7%D9%84%D8%AA%D8%B3%D8%AC%D9%8A%D9%84%20%D9%88%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%3A%20%28%D8%A7%D9%84%D8%A8%D8%A7%D9%82%D8%A9%20%D8%A7%D9%84%D8%A3%D8%B3%D8%A7%D8%B3%D9%8A%D8%A9%20-%2015%24%29" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp" style="color:#25d366"></i> اشترك الآن</a></div>
+<div class="price-card popular reveal"><div class="popular-tag">الأكثر طلباً</div><h3>باقة المحترفين PRO</h3><div class="price">$30 <span>/ شهرياً</span></div><ul class="pf"><li><i class="fa-solid fa-check"></i> جميع مميزات الباقة الأساسية</li><li><i class="fa-solid fa-check"></i> دخول مفتوح لقسم الساونا والاستشفاء</li><li><i class="fa-solid fa-check"></i> فحص InBody لقياس الدهون والعضلات</li><li><i class="fa-solid fa-check"></i> خصم 15% في البار الذكي</li></ul><a class="btn-glow" href="https://wa.me/963962266222?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20PRO%20GYM%20%F0%9F%92%AA%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%A7%D9%84%D8%AA%D8%B3%D8%AC%D9%8A%D9%84%20%D9%88%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%3A%20%28%D8%A8%D8%A7%D9%82%D8%A9%20%D8%A7%D9%84%D9%85%D8%AD%D8%AA%D8%B1%D9%81%D9%8A%D9%86%20PRO%20-%2030%24%29" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> اشترك الآن</a></div>
+<div class="price-card  reveal"><h3>باقة النخبة VIP</h3><div class="price">$45 <span>/ شهرياً</span></div><ul class="pf"><li><i class="fa-solid fa-check"></i> جميع مميزات باقة المحترفين</li><li><i class="fa-solid fa-check"></i> برنامج غذائي وحرق دهون مخصص</li><li><i class="fa-solid fa-check"></i> استشارات صحية ومتابعة أسبوعية</li><li><i class="fa-solid fa-check"></i> مشروب بروتين مجاني أسبوعياً</li></ul><a class="btn-glow btn-ghost" href="https://wa.me/963962266222?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20PRO%20GYM%20%F0%9F%92%AA%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%A7%D9%84%D8%AA%D8%B3%D8%AC%D9%8A%D9%84%20%D9%88%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%3A%20%28%D8%A8%D8%A7%D9%82%D8%A9%20%D8%A7%D9%84%D9%86%D8%AE%D8%A8%D8%A9%20VIP%20-%2045%24%29" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp" style="color:#25d366"></i> اشترك الآن</a></div>
+</div></section>
+<section id="faq"><div class="sh reveal"><h2>أوقات الدوام <span>والأسئلة الشائعة</span></h2><p>كل ما تحتاج معرفته قبل زيارتك الأولى إلى PRO GYM</p></div>
+<div class="info-faq-grid"><div class="hours-card reveal"><div class="hours-head"><div class="card-icon"><i class="fa-regular fa-clock"></i></div><h3>ساعات العمل الرسمية</h3></div><div class="hours-row"><span>السبت - الخميس</span><span>8:00 ص - 12:00 م</span></div><div class="hours-row"><span>فترة السيدات</span><span>9:00 ص - 3:00 ظ</span></div><div class="hours-row"><span>فترة الشباب</span><span>3:00 ظ - 12:00 م</span></div><div class="hours-row"><span>يوم الجمعة</span><span>2:00 ظ - 11:00 م</span></div></div><div class="faq-list reveal"><div class="faq-item active"><button type="button" class="faq-q" aria-expanded="true">هل يتوفر إشراف رياضي وتوجيه للمبتدئين داخل الصالة؟<i class="fa-solid fa-chevron-down"></i></button><div class="faq-a">نعم بالتأكيد، يتواجد مشرفون مختصون في الصالة بشكل دائم لمساعدتك في ضبط الأوزان وتصحيح أداء التمارين لتجنب الإصابات وضمان أفضل نتيجة.</div></div><div class="faq-item"><button type="button" class="faq-q" aria-expanded="false">هل يمكنني تجميد اشتراكي الشهري في حال السفر؟<i class="fa-solid fa-chevron-down"></i></button><div class="faq-a">نعم، تتيح لك باقة المحترفين PRO وباقة النخبة VIP إمكانية إيقاف الاشتراك مؤقتاً لمدة تصل إلى 10 أيام دون خسارة أي يوم من رصيدك.</div></div><div class="faq-item"><button type="button" class="faq-q" aria-expanded="false">كيف أطلب استشارة حرق الدهون أو فحص InBody؟<i class="fa-solid fa-chevron-down"></i></button><div class="faq-a">يمكنك حجز موعدك مباشرة عبر زر الواتساب في الموقع أو التوجه إلى مكتب الاستقبال في النادي لإجراء الفحص واستلام خطتك الغذائية فوراً.</div></div></div></div></section>
+</main>
+<a class="wa-float" href="https://wa.me/963962266222?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20PRO%20GYM%20%F0%9F%92%AA%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%A7%D9%84%D8%A7%D8%B4%D8%AA%D8%B1%D8%A7%D9%83" target="_blank" rel="noopener" title="تواصل معنا عبر واتساب" aria-label="واتساب"><i class="fa-brands fa-whatsapp"></i></a>
+<footer id="contact"><div class="ft">
+<a href="#home" class="logo"><i class="fa-solid fa-dumbbell" style="color:var(--primary)"></i><span dir="ltr">PRO <span class="grad">GYM</span></span></a>
+<div class="socials"><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a><a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a><a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a><a href="https://wa.me/963962266222" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a></div></div>
+<div class="fb"><div class="copyright">جميع الحقوق محفوظة &copy; 2026 <strong>PRO GYM</strong></div>
+<div class="dev"><i class="fa-solid fa-code"></i><span>Crafted with passion by <strong class="grad">hani el baour</strong></span></div></div>
+</footer>
+<script>
+(function(){
+var els=document.querySelectorAll('.reveal');
+if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('active');io.unobserve(e.target)}})},{threshold:.1});els.forEach(function(el){io.observe(el)})}else{els.forEach(function(el){el.classList.add('active')})}
+var sp=document.getElementById('sp'),nav=document.getElementById('nav'),t=false;
+window.addEventListener('scroll',function(){if(t)return;t=true;requestAnimationFrame(function(){var s=document.documentElement.scrollTop,h=document.documentElement.scrollHeight-document.documentElement.clientHeight;sp.style.width=(h>0?s/h*100:0)+'%';nav.classList.toggle('scrolled',s>50);t=false})},{passive:true});
+var $=function(i){return document.getElementById(i)};
+function calc(anim){
+var w=parseFloat($('weight').value),h=parseFloat($('height').value),bf=parseFloat($('bodyfat').value),act=parseFloat($('activity').value),goal=$('goal').value,err=$('calcErr');
+if(!(w>0)||!(h>0)){err.textContent='يرجى إدخال قيم صحيحة للوزن والطول';return}
+if(isNaN(bf))bf=18;
+if(bf<3||bf>60){err.textContent='نسبة الدهون لازم تكون بين 3% و60%';return}
+err.textContent='';
+var m=h/100,bmi=(w/(m*m)).toFixed(1),lbm=(w*(1-bf/100)).toFixed(1),st;
+if(bmi<18.5)st='نقص في الوزن <i class="fa-solid fa-circle-info" style="color:#38bdf8"></i>';
+else if(bmi<25)st='وزن مثالي <i class="fa-solid fa-circle-check" style="color:#22c55e"></i>';
+else if(bmi<30)st='زيادة في الوزن <i class="fa-solid fa-triangle-exclamation" style="color:#f59e0b"></i>';
+else st='سمنة <i class="fa-solid fa-circle-exclamation" style="color:#ef4444"></i>';
+var tdee=(370+21.6*parseFloat(lbm))*act,ppk=2.0;
+if(goal==='cut'){tdee-=450;ppk=2.2}else if(goal==='bulk'){tdee+=350;ppk=1.9}
+var kcal=Math.round(tdee),p=Math.round(w*ppk),f=Math.round(kcal*.25/9),c=Math.max(Math.round((kcal-p*4-f*9)/4),50),card=$('rc');
+function show(){$('bmiV').textContent=bmi;$('lbmV').textContent=lbm;$('bmiS').innerHTML=st;
+$('pV').innerHTML=p+' <span>غ</span>';$('cV').innerHTML=c+' <span>غ</span>';$('fV').innerHTML=f+' <span>غ</span>';$('kV').innerHTML=kcal.toLocaleString('en-US')+' <span>سعرة</span>';card.style.transform='scale(1)'}
+if(anim){card.style.transform='scale(.96)';setTimeout(show,150)}else show()}
+$('calcBtn').addEventListener('click',function(){calc(true)});
+['weight','height','bodyfat'].forEach(function(i){$(i).addEventListener('keydown',function(e){if(e.key==='Enter')calc(true)})});
+
+function cat(g,v){var m=g==='male',c=m?[[6,'الحد الأدنى الضروري'],[14,'رياضي'],[18,'لياقة جيدة'],[25,'متوسط'],[999,'مرتفع']]:[[14,'الحد الأدنى الضروري'],[21,'رياضية'],[25,'لياقة جيدة'],[32,'متوسط'],[999,'مرتفع']],i;for(i=0;i<c.length;i++){if(v<c[i][0])return c[i][1]}return 'مرتفع'}
+var lastBF=null;
+function bf(){
+var g=$('bfGender').value,age=parseFloat($('bfAge').value),w=parseFloat($('bfWeight').value),h=parseFloat($('bfHeight').value),er=$('bfErr');
+if(!(w>0)||!(h>0)||!(age>=15&&age<=90)){er.textContent='يرجى إدخال عمر (15 إلى 90) ووزن وطول بقيم صحيحة';return}
+var m=h/100,bmi=w/(m*m),v=1.2*bmi+0.23*age-10.8*(g==='male'?1:0)-5.4;
+if(v<3)v=3;if(v>60)v=60;
+er.textContent='';lastBF=Math.round(v*10)/10;
+$('bfV').textContent=lastBF;$('bfS').textContent=cat(g,v);
+var fat=w*v/100;$('bfFat').innerHTML=fat.toFixed(1)+' <span>كغ</span>';$('bfLean').innerHTML=(w-fat).toFixed(1)+' <span>كغ</span>';
+}
+$('bfGender').addEventListener('change',bf);
+$('bfBtn').addEventListener('click',bf);
+['bfAge','bfWeight','bfHeight'].forEach(function(i){$(i).addEventListener('keydown',function(e){if(e.key==='Enter')bf()})});
+$('bfUse').addEventListener('click',function(){if(lastBF===null)bf();if(lastBF===null)return;$('bodyfat').value=lastBF;$('weight').value=$('bfWeight').value;$('height').value=$('bfHeight').value;calc(true);$('calculator').scrollIntoView({behavior:'smooth'})});
+var dr=$('drawer'),mb=$('mmb');
+function setMenu(o){dr.classList.toggle('open',o);mb.setAttribute('aria-expanded',o?'true':'false')}
+mb.addEventListener('click',function(){setMenu(!dr.classList.contains('open'))});
+dr.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){setMenu(false)})});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')setMenu(false)});
+document.addEventListener('click',function(e){if(dr.classList.contains('open')&&!dr.contains(e.target)&&!mb.contains(e.target))setMenu(false)});
+document.querySelectorAll('.faq-q').forEach(function(b){b.addEventListener('click',function(){var it=b.parentElement,o=!it.classList.contains('active');it.classList.toggle('active',o);b.setAttribute('aria-expanded',o?'true':'false')})});
+bf();
+calc(false);
+})();
+</script>
+
+</body>
+</html>
